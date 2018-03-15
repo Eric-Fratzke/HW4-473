@@ -15,11 +15,22 @@
   var checkList = new CheckList(CHECKLIST_SELECTOR);
   checkList.addClickHandler(myTruck.deliverOrder.bind(myTruck));
   var formHandler = new FormHandler(FORM_SELECTOR);
+  var checkBackEnd = 0;
 
   formHandler.addSubmitHandler(function(data) {
     myTruck.createOrder.call(myTruck, data);
     checkList.addRow.call(checkList, data);
   });
+
+  remoteDS.getAll(function(loadBackEnd){
+    if(loadBackEnd.length > 0)
+    {
+      do{
+        checkList.addRow(loadBackEnd[checkBackEnd++]);
+      }while(checkBackEnd < loadBackEnd.length);
+    }
+  });
+
   formHandler.addInputHandler(Validation.isCompanyEmail);
 
   console.log(formHandler);
