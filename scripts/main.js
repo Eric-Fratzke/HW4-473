@@ -22,12 +22,11 @@
     checkList.addRow.call(checkList, data);
   });
 
-  remoteDS.getAll(function(loadBackEnd){
-    if(loadBackEnd.length > 0)
-    {
-      do{
+  remoteDS.getAll(function(loadBackEnd) {
+    if (loadBackEnd.length > 0) {
+      do {
         checkList.addRow(loadBackEnd[checkBackEnd++]);
-      }while(checkBackEnd < loadBackEnd.length);
+      } while (checkBackEnd < loadBackEnd.length);
     }
   });
 
